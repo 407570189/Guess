@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
         private EditText num;
         private TextView message;
         private TextView Guess;
+        private Button zero;
         String TAG =MainActivity.class.getName();
         int secret =new Random().nextInt(10)+1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         num=findViewById(R.id.number);
         message =findViewById(R.id.message);
         Guess =findViewById(R.id.guess);
-
+        zero=findViewById(R.id.reset);
+        
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+            public void zero(View view){
+                secret=new Random().nextInt(10)+1;
+                num.setText("");
+                message.setText("");
+                zero.setVisibility(View.GONE);
+
+            }
             public void turn(View view){
                 Scanner scanner = new Scanner(System.in);
                 int guess= Integer.parseInt(num.getText().toString());
@@ -53,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else  if(guess>secret){
                     message.setText(" too big");}
+                    zero.setVisibility(View.VISIBLE);
             }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

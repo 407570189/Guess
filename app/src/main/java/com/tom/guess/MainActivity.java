@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         private TextView message;
         private TextView Guess;
         private Button zero;
+        int counter=0;
+        private TextView count;
         String TAG =MainActivity.class.getName();
         int secret =new Random().nextInt(10)+1;
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         message =findViewById(R.id.message);
         Guess =findViewById(R.id.guess);
         zero=findViewById(R.id.reset);
+        count=findViewById(R.id.counts);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -51,20 +54,32 @@ public class MainActivity extends AppCompatActivity {
                 num.setText("");
                 message.setText("");
                 zero.setVisibility(View.GONE);
+                count.setText(counter+""+"次");
 
             }
             public void turn(View view){
                 Scanner scanner = new Scanner(System.in);
                 int guess= Integer.parseInt(num.getText().toString());
                 Log.d(TAG, "secret:"+secret);
+                //new AlertDialog.Builder(MainActivity.this)
+                 //       .setTitle("hahaha")
+                  //      .setMessage("Bigger")
+                    //    .setPositiveButton("OK", null)
+                   //     .show();
                 if(guess==secret){
                     message.setText("bingo");
+                    count.setText("共"+counter+""+"次");
                 }
                 else  if(guess<secret) {
                     message.setText("too small");
+                    counter++;
+                    count.setText(counter+""+"次");
                 }
                 else  if(guess>secret){
-                    message.setText(" too big");}
+                    message.setText(" too big");
+                    counter++;
+                    count.setText(counter+""+"次");
+                }
                     zero.setVisibility(View.VISIBLE);
             }
     @Override

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         message =findViewById(R.id.message);
         Guess =findViewById(R.id.guess);
         zero=findViewById(R.id.reset);
-        
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
